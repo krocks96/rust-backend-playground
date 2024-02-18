@@ -1,0 +1,17 @@
+[package]
+name = "todo_api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4"
+actix-rt = "2"
+dotenv = "0.15"
+tokio = { version = "1", features = ["full"] }
+diesel = { version = "1.4", features = ["postgres", "r2d2", "chrono"] }
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4.14"
+env_logger = "0.10.0"
+chrono = { version = "0.4", features = ["serde"] }

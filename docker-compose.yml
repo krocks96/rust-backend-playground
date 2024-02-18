@@ -1,0 +1,28 @@
+version: '3'
+services:
+  todo_api:
+    build: ./todo_api
+    volumes:
+      - ./todo_api/src:/usr/src/todo_api/src
+      - ./todo_api/Cargo.toml:/usr/src/todo_api/Cargo.toml
+      - ./todo_api/Cargo.lock:/usr/src/todo_api/Cargo.lock
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://user:password@db/todo_db
+      - RUST_LOG=debug
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: todo_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
